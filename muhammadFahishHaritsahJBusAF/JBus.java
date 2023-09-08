@@ -32,9 +32,9 @@ public class JBus
         float percentage;
         if (beforeDiscount <= afterDiscount){
             percentage = 0.0f;
-        } else {
-            percentage = ( (beforeDiscount - afterDiscount)/beforeDiscount ) * 100;
-        }
+        } 
+            percentage = (float)( (beforeDiscount - afterDiscount)/(float)beforeDiscount ) * 100;
+        
         
         return percentage;
     }
