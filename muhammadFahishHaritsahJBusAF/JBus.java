@@ -9,27 +9,67 @@ package muhammadFahishHaritsahJBusAF;
  */
 public class JBus
 {
-    // instance variables - replace the example below with your own
-    private int x;
-
-    /**
-     * Constructor for objects of class JBus
-     */
-    public JBus()
-    {
-        // initialise instance variables
-        x = 0;
+    
+    public static void main(String[] args){
+            
+            
     }
-
-    /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
-     */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return x + y;
+    
+    public static int getBusId(){
+        return 0;
     }
+    
+    public static String getBusName(){
+        String bus = "Bus";
+        return bus;
+    }
+    
+    public static boolean isDiscount(){
+        return true;
+    }
+    
+    public static float getDiscountPercentage(int beforeDiscount, int afterDiscount){
+        float percentage;
+        if (beforeDiscount <= afterDiscount){
+            percentage = 0.0f;
+        } else {
+            percentage = ( (beforeDiscount - afterDiscount)/beforeDiscount ) * 100;
+        }
+        
+        return percentage;
+    }
+    
+    public static int getDiscountedPrice(int price, float discountPercentage){
+        int discountedPrice;
+        if (discountPercentage > 100.0f){ discountPercentage =  100.0f; }
+ 
+        discountedPrice = (int)(price - (price * (discountPercentage/100)));
+        
+        return discountedPrice;
+    }
+    
+    public static int getOriginalPrice(int discountedPrice, float discountPercentage){
+        int originalPrice = (int)(discountedPrice/(1 - discountPercentage*0.01));
+        
+        return originalPrice;
+    }
+    
+    public static float getAdminFeePercentage(){
+        return 0.05f;
+    }
+    
+    public static int getAdminFee(int price){
+        float admin = getAdminFeePercentage();
+        int adminFee = (int)(price * admin);
+        
+        return adminFee;
+    }
+    
+    public static int getTotalPrice(int price, int numberOfSeat){
+        int adminFee = getAdminFee(price * numberOfSeat);
+        int total = (price * numberOfSeat) + adminFee;
+        
+        return total;
+    }
+    
 }
