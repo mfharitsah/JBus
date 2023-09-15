@@ -1,18 +1,21 @@
 package muhammadFahishHaritsahJBusAF;
 
-
-/**
- * Write a description of class JBus here.
- *
- * @author (your name)
- * @version (a version number or a date)
- */
 public class JBus
 {
     
     public static void main(String[] args){
+        Bus test = createBus();
+        System.out.println(test.name);
+        System.out.println(test.facility);
+        System.out.println(test.price.price);
+        System.out.println(test.capacity);
             
-            
+    }
+    
+    public static Bus createBus(){
+        Price price = new Price(750000.0d, 5);
+        Bus bus = new Bus("Samsung Bus", Facility.LCD_TV, price, 20);
+        return bus;
     }
     
     public static int getBusId(){
