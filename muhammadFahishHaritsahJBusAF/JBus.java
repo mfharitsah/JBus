@@ -9,7 +9,6 @@ public class JBus
         System.out.println(test.facility);
         System.out.println(test.price.price);
         System.out.println(test.capacity);
-            
     }
     
     public static Bus createBus(){
