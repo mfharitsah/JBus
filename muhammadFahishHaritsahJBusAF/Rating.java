@@ -6,7 +6,7 @@ class Rating{
     private long count;
     private long total;
     
-    public Rating(long count, long total){
+    public Rating(){
         this.count = 0;
         this.total = 0;
     }
@@ -33,6 +33,6 @@ class Rating{
     }
     
     public long getTotal(){
-        return this.count;
+        return this.total;
     }
 }
