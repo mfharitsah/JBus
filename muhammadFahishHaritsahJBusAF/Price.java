@@ -1,12 +1,13 @@
 package muhammadFahishHaritsahJBusAF;
 
-class Price{
+public class Price{
     
     //field
     public double price;
     public int discount;
     public double rebate;
     
+    //constructor
     public Price(double price){
         this.price = price;
         this.discount = 0;
@@ -26,22 +27,22 @@ class Price{
     }
     
     private double getDiscountedPrice(){
-        if (this.discount >= 100) {
-            this.discount = 100;
+        if (discount >= 100) {
+            discount = 100;
         } 
-        double discountSum = this.price * (double) this.discount / 100;
-        return this.price - discountSum;
+        double discountSum = price * (double) discount / 100;
+        return price - discountSum;
     }
     
-    private double getRebatePrice(){
-        double price;
+    private double getRebatedPrice(){
+        double rebatePrice;
         
-        price = this.price - this.rebate;
-        if (price < 0){
-            price = 0;
+        rebatePrice = price - rebate;
+        if (rebatePrice < 0){
+            rebatePrice = 0;
         }
         
-        return price;
+        return rebatePrice;
     }
 
 }

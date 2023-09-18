@@ -1,6 +1,6 @@
 package muhammadFahishHaritsahJBusAF;
 
-class Rating{
+public class Rating{
     
     //field
     private long count;
@@ -22,17 +22,18 @@ class Rating{
         if(this.count != 0){
             res = this.total/this.count;
         } else{
-            res = 0.0d;   
+            System.out.println("Cannot division by zero :(");
+            res = 0;   
         }
         
         return res;
     }
     
-    public long getCount(){
-        return this.count;
+    public long getTotal() {
+        return this.total;
     }
     
-    public long getTotal(){
-        return this.total;
+    public long getCount() {
+        return this.count;
     }
 }

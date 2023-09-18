@@ -9,5 +9,5 @@ comment3.target=Price(double,\ double)
 comment4.params=
 comment4.target=double\ getDiscountedPrice()
 comment5.params=
-comment5.target=double\ getRebatePrice()
+comment5.target=double\ getRebatedPrice()
 numComments=6

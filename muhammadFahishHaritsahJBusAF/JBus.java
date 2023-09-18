@@ -13,7 +13,7 @@ public class JBus
     }
     
     public static Bus createBus(){
-        Price price = new Price(750000.0d, 5);
+        Price price = new Price(100000.0d, 5);
         Bus bus = new Bus("Samsung Bus", Facility.LCD_TV, price, 20);
         return bus;
     }

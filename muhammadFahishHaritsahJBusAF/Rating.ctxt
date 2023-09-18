@@ -1,13 +1,13 @@
 #BlueJ class context
 comment0.target=Rating
-comment1.params=count\ total
-comment1.target=Rating(long,\ long)
+comment1.params=
+comment1.target=Rating()
 comment2.params=rating
 comment2.target=void\ insert(int)
 comment3.params=
 comment3.target=double\ getAverage()
 comment4.params=
-comment4.target=long\ getCount()
+comment4.target=long\ getTotal()
 comment5.params=
-comment5.target=long\ getTotal()
+comment5.target=long\ getCount()
 numComments=6
