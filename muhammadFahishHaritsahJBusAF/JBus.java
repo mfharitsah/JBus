@@ -4,18 +4,25 @@ public class JBus
 {
     
     public static void main(String[] args){
-        Bus test = createBus();
+        /*Bus test = createBus();
         System.out.println(test.name);
         System.out.println(test.facility);
         System.out.println(test.price.price);
-        System.out.println(test.capacity);
+        System.out.println(test.capacity); */
+        
+        Payment testPayment = new Payment(1, 1, 1, "A", 1, "A", "A");
+        Invoice testInvoice = new Invoice(2, 2, 2, "B");
+        Station testStation = new Station(3, "C", City.DEPOK);
+        System.out.println(testPayment.print());
+        System.out.println(testInvoice.print());
+        System.out.println(testStation.print());
     }
     
-    public static Bus createBus(){
+    /* public static Bus createBus(){
         Price price = new Price(100000.0d, 5);
         Bus bus = new Bus("Samsung Bus", Facility.LCD_TV, price, 20);
         return bus;
-    }
+    } */
     
     public static int getBusId(){
         return 0;

@@ -1,6 +1,6 @@
 package muhammadFahishHaritsahJBusAF;
 
-public class Voucher {
+public class Voucher extends Serializable {
     
     //field
     public String name;
@@ -10,7 +10,8 @@ public class Voucher {
     public int code;
     public Type type;
     
-    public Voucher(String name, int code, Type type, double minimun, double cut){
+    public Voucher(int id, String name, int code, Type type, double minimun, double cut){
+        super(id);
         this.name = name;
         this.code = code;
         this.type = type;
