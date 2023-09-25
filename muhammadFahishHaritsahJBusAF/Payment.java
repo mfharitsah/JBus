@@ -33,7 +33,7 @@ public class Payment extends Invoice
     }
     
     //method
-    public String print(){
+    public String toString(){
        String print = "ID : " + id + "\nBus ID : " + busId + "\nDeparture Date = " + departureDate + "\nBus Seat = " + busSeat ;
        return print;
     }

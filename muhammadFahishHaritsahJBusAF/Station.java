@@ -12,15 +12,17 @@ public class Station extends Serializable
     //fields
     public City city;
     public String stationName;
+    public String address;
     
-    public Station(int id, String stationName, City city){
+    public Station(int id, String stationName, City city, String address){
         super(id);
         this.stationName = stationName;
         this.city = city;
+        this.address = address;
     }
     
-    public String print(){
-        String print = "ID : " + id + "\nStation Name : " + stationName + "\n" + "City : " + city.toString();
+    public String toString(){
+        String print = "\nID : " + id + "\nStation Name : " + stationName + "\n" + "City : " + city.toString() + "\nAddress : " + address.toString();
         return print;
     }
 }

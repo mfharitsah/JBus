@@ -36,4 +36,9 @@ public class Rating{
     public long getCount() {
         return this.count;
     }
+    
+    public String toString(){
+        String print = "\nRating : " + "\nCount : " + count + "\nTotal : " + total;
+        return print;
+    }
 }

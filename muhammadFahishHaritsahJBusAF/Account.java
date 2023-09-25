@@ -9,6 +9,13 @@ public class Account extends Serializable{
     
     public Account(int id, String name, String email, String password){
         super(id);
+        this.email = email;
+        this.password = password;
+        this.name = name;
     }
-    
+     
+    public String toString(){
+        String print = "\nAccount : " + "\nEmail : " + email + "\nPassword : " + password + "\nName : " + name;
+        return print;
+    }
 }
