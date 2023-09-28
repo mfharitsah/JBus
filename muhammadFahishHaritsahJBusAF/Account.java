@@ -1,6 +1,6 @@
 package muhammadFahishHaritsahJBusAF;
 
-public class Account extends Serializable{
+public class Account extends Serializable implements FileParse {
     
     //field
     public String email;

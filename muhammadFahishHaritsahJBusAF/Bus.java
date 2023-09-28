@@ -1,7 +1,7 @@
 package muhammadFahishHaritsahJBusAF;
 
 
-public class Bus extends Serializable{
+public class Bus extends Serializable implements FileParse {
     
     //field
     public String name;

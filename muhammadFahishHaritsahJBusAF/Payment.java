@@ -1,6 +1,5 @@
 package muhammadFahishHaritsahJBusAF;
 
-
 /**
  * Write a description of class Payment here.
  *
