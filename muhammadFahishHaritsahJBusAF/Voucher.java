@@ -50,4 +50,10 @@ public class Voucher extends Serializable implements FileParse {
         } else return 0;
     }
     
+    public boolean read(){
+        return false;        
+    }
+    public Object write(){
+        return null;
+    }
 }

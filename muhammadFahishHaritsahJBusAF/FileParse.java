@@ -9,5 +9,6 @@ package muhammadFahishHaritsahJBusAF;
  */
 public interface FileParse
 {
-    
+    public boolean read();
+    public Object write();
 }

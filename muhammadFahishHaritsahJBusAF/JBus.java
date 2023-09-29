@@ -1,5 +1,7 @@
 package muhammadFahishHaritsahJBusAF;
 
+import java.util.Calendar;
+
 public class JBus
 {
     
@@ -46,13 +48,30 @@ public class JBus
       System.out.println("Above 10000.0");
       System.out.println(Validate.filter(unfilteredArray, 10000, false));
       
+      Bus testBus = createBus();
+      
+      //Payment
+      Payment testPayment = new Payment(1, 1, 1, testBus.id, "S1");
+      System.out.println("\n" + testPayment.getDepartureInfo());
+      System.out.println(testPayment.getTime());
+      
+      //Calendar
+      Calendar sched1 = Calendar.getInstance();
+      testBus.addSchedule(sched1);
+      Calendar sched2 =  Calendar.getInstance();
+      sched2.add(Calendar.DAY_OF_MONTH, 3);
+      testBus.addSchedule(sched2);
+     
+     for(Schedule s : testBus.schedules) {
+         testBus.printSchedule(s);
+     }
     }
     
-    /* public static Bus createBus(){
-        Price price = new Price(100000.0d, 5);
-        Bus bus = new Bus("Samsung Bus", Facility.LCD_TV, price, 20);
+    public static Bus createBus() {
+        Price price = new Price(750000, 5);
+        Bus bus = new Bus(1, "Netlab Bus", Facility.LUNCH, price, 25, BusType.REGULER, City.BANDUNG, new Station(1, "Depok Terminal", City.DEPOK, "Jl. Margonda Raya"), new Station(2, "Halte UI", City.JAKARTA, "Universitas Indonesia"));
         return bus;
-    } */
+    }
     
     public static int getBusId(){
         return 0;
