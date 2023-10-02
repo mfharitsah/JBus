@@ -13,7 +13,7 @@ public class Schedule
    public Map<String, Boolean> seatAvailability;
    
    public Schedule(Timestamp departureSchedule, int numberOfSeats){
-       this.departureSchedule = new Timestamp(System.currentTimeMillis());
+       this.departureSchedule = departureSchedule;
        
        initializeSeatAvailability(numberOfSeats);
    }
