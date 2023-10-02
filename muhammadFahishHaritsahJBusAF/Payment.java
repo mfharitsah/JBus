@@ -51,9 +51,9 @@ public class Payment extends Invoice
         return busId;
     }
     
-    public static boolean isAvailable(Timestamp departureDate, String seat, Bus bus){
+    public static boolean isAvailable(Timestamp departureSchedule, String seat, Bus bus){
         for (Schedule schedule : bus.schedules) {
-            if (schedule.departureSchedule.equals(departureDate) && schedule.isSeatAvailable(seat)) {
+            if (schedule.departureSchedule.equals(departureSchedule) && schedule.isSeatAvailable(seat)) {
                 return true;
             }  
         }
@@ -61,9 +61,9 @@ public class Payment extends Invoice
         return false;
     }
 
-    public static boolean makeBooking(Timestamp departureDate, String seat, Bus bus){
+    public static boolean makeBooking(Timestamp departureSchedule, String seat, Bus bus){
             for (Schedule schedule : bus.schedules) {
-                if (schedule.departureSchedule.equals(departureDate) && schedule.isSeatAvailable(seat)){
+                if (schedule.departureSchedule.equals(departureSchedule) && schedule.isSeatAvailable(seat)){
                     schedule.bookSeat(seat);
                     return true;
                 }
