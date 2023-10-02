@@ -3,8 +3,11 @@ package muhammadFahishHaritsahJBusAF;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.text.SimpleDateFormat;
+import java.util.Map;
+import java.sql.Timestamp;
 
-public class Bus extends Serializable implements FileParse {
+public class Bus extends Serializable implements FileParser {
     
     //field
     public String name;
@@ -33,17 +36,10 @@ public class Bus extends Serializable implements FileParse {
     }
     
     //method
-    public void addSchedule(Calendar calendar){
+    public void addSchedule(Timestamp calendar, int capacity){
         Schedule sched = new Schedule(calendar, capacity);
         
         schedules.add(sched);
-    }
-    
-    public void printSchedule(Schedule schedule){
-        System.out.println("\nTanggal Keberangkatan: " + schedule.departureSchedule.getTime());
-        
-        System.out.println("Daftar kursi dan ketersediaan kursinya:");
-        System.out.println(schedule.seatAvailability);
     }
     
     public boolean read(){
