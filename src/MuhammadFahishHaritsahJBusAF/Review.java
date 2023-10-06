@@ -14,8 +14,8 @@ public class Review extends Serializable
     public String desc;
     
     //constructor
-    public Review(int id, String date, String desc){
-        super(id);
+    public Review(String date, String desc){
+        super();
         this.date = date;
         this.desc = desc;
     }

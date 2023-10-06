@@ -13,8 +13,8 @@ public class Payment extends Invoice
     public String busSeat;
     
     //constructor
-    public Payment(int id, int buyerId, int renterId, int busId, String busSeat, Timestamp departureDate){
-        super(id, renterId, buyerId);
+    public Payment(int buyerId, int renterId, int busId, String busSeat, Timestamp departureDate){
+        super(renterId, buyerId);
         
         this.busId = busId;
         this.busSeat = busSeat;
@@ -22,8 +22,8 @@ public class Payment extends Invoice
         this.departureDate = departureDate;
     }
     
-    public Payment(int id, Account buyer, Renter renter, int busId, String busSeat, Timestamp departureDate){
-        super(id, buyer, renter);
+    public Payment(Account buyer, Renter renter, int busId, String busSeat, Timestamp departureDate){
+        super(buyer, renter);
         
         this.busId = busId;
         this.busSeat = busSeat;

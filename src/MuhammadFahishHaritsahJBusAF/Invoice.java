@@ -33,8 +33,8 @@ public class Invoice extends Serializable
        SUCCESS;
    }
    
-   protected Invoice(int id, int buyerId, int renterId){
-       super(id);
+   protected Invoice(int buyerId, int renterId){
+       super();
        this.buyerId = buyerId;
        this.renterId = renterId;
        this.time = new Timestamp(System.currentTimeMillis());
@@ -42,8 +42,8 @@ public class Invoice extends Serializable
        this.status = PaymentStatus.WAITING;
    }
    
-   public Invoice(int id, Account buyer, Renter renter){
-       super(id);
+   public Invoice(Account buyer, Renter renter){
+       super();
        this.buyerId = buyer.id;
        this.renterId = renter.id;
        this.time = new Timestamp(System.currentTimeMillis());
