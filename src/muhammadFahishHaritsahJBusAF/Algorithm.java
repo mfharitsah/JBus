@@ -168,7 +168,7 @@ public class Algorithm {
         T current;
 
         while (iterator.hasNext() && pageArray.size() < page){
-            if ((i < ((page + 1) * pageSize)) && (i > (page * pageSize))){
+            if ((i < ((page + 1) * pageSize)) && (i >= (page * pageSize))){
                 current = iterator.next();
                 pageArray.add(current);
                 i++;

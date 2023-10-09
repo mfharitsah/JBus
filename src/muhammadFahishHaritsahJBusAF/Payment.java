@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.text.SimpleDateFormat;
 import java.util.Date;  
 import java.sql.Timestamp;
+import java.util.List;
 
 public class Payment extends Invoice
 {
@@ -51,11 +52,27 @@ public class Payment extends Invoice
         return busId;
     }
 
+    public static Schedule availableSchedule(Timestamp schedule, String seat, Bus bus){
+        for (Schedule string : bus.schedules) {
+            if (string.departureSchedule == schedule) {
+                if (string.isSeatAvailable(seat)){
+                    return string;
+                }
+            }
+        }
+        return null;
+    }
 
-//    public Schedule availableSchedule(Timestamp departureSchedule, String seat, Bus bus){
-//
-//    }
-
+    public static Schedule availableSchedule(Timestamp schedule, List<String> seat, Bus bus){
+        for (Schedule string : bus.schedules) {
+            if (string.departureSchedule.equals(schedule)) {
+                if (string.isSeatAvailable(seat)){
+                    return string;
+                }
+            }
+        }
+        return null;
+    }
 
     public static boolean makeBooking(Timestamp departureSchedule, String seat, Bus bus){
             for (Schedule schedule : bus.schedules) {
@@ -65,6 +82,17 @@ public class Payment extends Invoice
                 }
             }    
         
+        return false;
+    }
+
+    public static boolean makeBooking(Timestamp departureSchedule, List<String> seat, Bus bus){
+        for (Schedule schedule : bus.schedules) {
+            if (schedule.departureSchedule.equals(departureSchedule) && schedule.isSeatAvailable(seat)){
+                schedule.bookSeat(seat);
+                return true;
+            }
+        }
+
         return false;
     }
 

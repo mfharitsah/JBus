@@ -20,7 +20,7 @@ public class Bus extends Serializable implements FileParser {
     public City city;
     public List<Schedule> schedules;
     
-    public Bus(int id, String name, Facility facility, Price price, int capacity, BusType busType, City city, Station departure, Station arrival){
+    public Bus(String name, Facility facility, Price price, int capacity, BusType busType, City city, Station departure, Station arrival){
         super();
         this.name = name;
         this.facility = facility;
@@ -36,7 +36,7 @@ public class Bus extends Serializable implements FileParser {
     }
     
     //method
-    public void addSchedule(Timestamp calendar, int capacity){
+    public void addSchedule(Timestamp calendar){
         Schedule sched = new Schedule(calendar, capacity);
         
         schedules.add(sched);

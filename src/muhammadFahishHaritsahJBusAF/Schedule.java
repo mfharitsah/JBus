@@ -71,6 +71,7 @@ public class Schedule
     public void bookSeat(String seat){
         seatAvailability.put(seat, false);
     }
+    
     public void bookSeat(List<String> seat){
         for(String i : seat){
             seatAvailability.put(i, false);
