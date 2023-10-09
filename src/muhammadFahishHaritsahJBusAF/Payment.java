@@ -52,9 +52,9 @@ public class Payment extends Invoice
     }
 
 
-    public Schedule availableSchedule(Timestamp departureSchedule, String seat, Bus bus){
-        return departureSchedule;
-    }
+//    public Schedule availableSchedule(Timestamp departureSchedule, String seat, Bus bus){
+//
+//    }
 
 
     public static boolean makeBooking(Timestamp departureSchedule, String seat, Bus bus){
@@ -67,5 +67,5 @@ public class Payment extends Invoice
         
         return false;
     }
-    
+
 }
