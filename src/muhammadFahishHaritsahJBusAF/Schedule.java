@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.LinkedHashMap;
 import java.text.SimpleDateFormat;
 import java.sql.Timestamp;
+import java.util.List;
 
 public class Schedule
 {
@@ -50,14 +51,35 @@ public class Schedule
         
         System.out.println("\n");
     }
-    
+
     public boolean isSeatAvailable(String seat){
-        if (seatAvailability.containsKey(seat)){
-            return this.seatAvailability.get(seat);
-        } else { return false; }
+        if(seatAvailability.containsKey(seat)){
+            return seatAvailability.get(seat);
+        }
+        return false;
     }
-    
+
+    public boolean isSeatAvailable(List<String> seat){
+        for(int i = 0; i < seat.size(); i++){
+            if(seatAvailability.containsKey(seat.get(i))){
+                return seatAvailability.get(seat.get(i));
+            }
+        }
+        return false;
+    }
+
     public void bookSeat(String seat){
-        this.seatAvailability.put(seat, false);
+        seatAvailability.put(seat, false);
+    }
+    public void bookSeat(List<String> seat){
+        for(String i : seat){
+            seatAvailability.put(i, false);
+        }
+    }
+
+    @Override
+    public String toString(){
+        int occupiedSeat = Algorithm.count(seatAvailability.values().iterator(), true);
+        return "Schedule\t: " + departureSchedule + "\nOccupied\t: " +  occupiedSeat + "\n" + seatAvailability.size();
     }
 }

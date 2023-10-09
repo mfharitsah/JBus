@@ -50,16 +50,12 @@ public class Payment extends Invoice
     public int getBusId(){
         return busId;
     }
-    
-    public static boolean isAvailable(Timestamp departureSchedule, String seat, Bus bus){
-        for (Schedule schedule : bus.schedules) {
-            if (schedule.departureSchedule.equals(departureSchedule) && schedule.isSeatAvailable(seat)) {
-                return true;
-            }  
-        }
-        
-        return false;
+
+
+    public Schedule availableSchedule(Timestamp departureSchedule, String seat, Bus bus){
+        return departureSchedule;
     }
+
 
     public static boolean makeBooking(Timestamp departureSchedule, String seat, Bus bus){
             for (Schedule schedule : bus.schedules) {
