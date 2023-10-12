@@ -60,9 +60,9 @@ public class Schedule
     }
 
     public boolean isSeatAvailable(List<String> seat){
-        for(int i = 0; i < seat.size(); i++){
-            if(seatAvailability.containsKey(seat.get(i))){
-                return seatAvailability.get(seat.get(i));
+        for(String i : seat){
+            if(seatAvailability.containsKey(i)){
+                return seatAvailability.get(i);
             }
         }
         return false;
@@ -71,7 +71,7 @@ public class Schedule
     public void bookSeat(String seat){
         seatAvailability.put(seat, false);
     }
-    
+
     public void bookSeat(List<String> seat){
         for(String i : seat){
             seatAvailability.put(i, false);
@@ -81,6 +81,6 @@ public class Schedule
     @Override
     public String toString(){
         int occupiedSeat = Algorithm.count(seatAvailability.values().iterator(), true);
-        return "Schedule\t: " + departureSchedule + "\nOccupied\t: " +  occupiedSeat + "\n" + seatAvailability.size();
+        return "Schedule\t: " + departureSchedule + "\nOccupied\t: " +  occupiedSeat + "/" + seatAvailability.size();
     }
 }

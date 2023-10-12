@@ -6,150 +6,71 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import com.google.gson.*;
+import com.google.gson.reflect.TypeToken;
+
 public class JBus
 {
     
     public static void main(String[] args){
-        /*Bus test = createBus();
-        System.out.println(test.name);
-        System.out.println(test.facility);
-        System.out.println(test.price.price);
-        System.out.println(test.capacity); */
-        
-        /* Payment testPayment = new Payment(1, 1, 1, "A", 1, "A", "A");
-        Invoice testInvoice = new Invoice(2, 2, 2, "B");
-        Station testStation = new Station(3, "C", City.DEPOK);
-        System.out.println(testPayment.print());
-        System.out.println(testInvoice.print());
-        System.out.println(testStation.print()); */
-        
-        /* Review testReview = new Review(1, "23 August 2023", "Bad Quality");
-        Price testPrice = new Price(100000, 20000);
-        Station testDeparture = new Station(2, "Depok Terminal", City.DEPOK, "Jl. Margonda Raya");
-        Station testArrival = new Station(3, "Halte UI", City.JAKARTA, "Universitas Indonesia");
-        Bus testBus = new Bus(1, "Busway", Facility.AC, testPrice, 50, BusType.REGULER, City.DEPOK, testDeparture, testArrival);
-        Account testAccount = new Account(1, "Bob", "bob@gmail.com", "bob");
-        Rating testRating = new Rating();
-        System.out.println(testReview);
-        System.out.println(testBus);
-        System.out.println(testAccount);
-        System.out.println(testPrice);
-        System.out.println(testRating); */
-        
-      /*  Price[] unfilteredArray = new Price[5];
-      for(int i = 0 ; i < unfilteredArray.length ; i++) {
-          int j = 5000;
-          unfilteredArray[i] = new Price((i  + 1) * j);
-      }
-      
-      System.out.println("Price List");
-      for(Price price : unfilteredArray){
-          System.out.println(price.price);
-      }
-      
-      System.out.println("Below 12000.0");
-      System.out.println(Validate.filter(unfilteredArray, 12000, true));
-      System.out.println("Above 10000.0");
-      System.out.println(Validate.filter(unfilteredArray, 10000, false));
-      
-      Bus testBus = createBus();
-      
-      //Payment
-      Payment testPayment = new Payment(1, 1, 1, testBus.id, "S1");
-      System.out.println(testPayment.getDepartureInfo());
-      System.out.println(testPayment.getTime());
-      
-      //Calendar
-      Calendar sched1 = Calendar.getInstance();
-      testBus.addSchedule(sched1);
-      Calendar sched2 =  Calendar.getInstance();
-      sched2.add(Calendar.DAY_OF_MONTH, 3);
-      testBus.addSchedule(sched2);
-     
-     for(Schedule s : testBus.schedules) {
-         testBus.printSchedule(s);
-     } */
-     
+//        // PT Modul 5
+//        // Tes Pagination
 //        Bus b = createBus();
-//        Timestamp schedule1 = Timestamp.valueOf("2023-7-18 15:00:00");
-//        Timestamp schedule2 = Timestamp.valueOf("2023-7-20 12:00:00");
-//        b.addSchedule(schedule1, 12);
-//        b.addSchedule(schedule2, 12);
-//        b.schedules.forEach(Schedule::printSchedule);
-//        //Invalid date
-//        Timestamp t1 = Timestamp.valueOf("2023-7-19 15:00:00");
-//        System.out.println("Make booking at July 19, 2023 15:00:00 Seat AF12");
-//        System.out.println(Payment.makeBooking(t1, "AF12", b));
-//        //Valid date, invalid seat
-//        Timestamp t2 = Timestamp.valueOf("2023-7-18 15:00:00");
-//        System.out.println("\nMake booking at July 18, 2023 15:00:00 Seat AF20");
-//        System.out.println(Payment.makeBooking(t2, "AF20", b));
-//        //Valid date, valid seat
-//        System.out.println("\nMake booking at July 18, 2023 15:00:00 Seat AF07");
-//        System.out.println(Payment.makeBooking(t2, "AF07", b));
-//        Timestamp t3 = Timestamp.valueOf("2023-7-20 12:00:00");
-//        System.out.println("\nMake booking at July 20, 2023 12:00:00 Seat AF01");
-//        System.out.println(Payment.makeBooking(t3, "AF01", b));
-//        System.out.println("\nMake booking at July 20, 2023 12:00:00 Seat AF01 again");
-//        System.out.println(Payment.makeBooking(t3, "AF01", b));
-//        //Checkifthedatachanged
-//        System.out.println("\nUpdatedSchedule\n");
-//        b.schedules.forEach(Schedule::printSchedule);
-
-//        Integer[] numbers = {18, 10, 22, 43, 18, 67, 12, 11, 88, 22, 18};
-//        System.out.println("Number "+ Arrays.toString(numbers));
+//        List<Timestamp> listOfSchedules = new ArrayList<>();
+//        listOfSchedules.add(Timestamp.valueOf("2023-7-18 15:00:00"));
+//        listOfSchedules.add(Timestamp.valueOf("2023-7-20 12:00:00"));
+//        listOfSchedules.add(Timestamp.valueOf("2023-7-22 10:00:00"));
+//        listOfSchedules.add(Timestamp.valueOf("2023-7-26 12:00:00"));
 //
-//        // Tes Algorithm
-//        System.out.print("1. ");
-//        testCount(numbers);
-//        System.out.print("2. ");
-//        testFind(numbers);
-//        System.out.print("3. ");
-//        testExist(numbers);
-//        System.out.println("4. Filtering");
-//        testCollect(numbers);
+//        listOfSchedules.forEach(b::addSchedule);
+//        System.out.println("Page 1");
+//        Algorithm.paginate(b.schedules, 0, 3, t -> true).forEach(System.out::println);
+//        System.out.println("=====================================================");
+//        System.out.println("Page 2");
+//        Algorithm.paginate(b.schedules, 1, 3, t -> true).forEach(System.out::println);
+//        System.out.println("=====================================================");
+//
+//        // Tes Booking
+//        String msgSuccess = "Booking Success!";
+//        String msgFailed = "Booking Failed";
+//        // valid date, invalid seat = Booking Failed
+//        Timestamp t1 = Timestamp.valueOf("2023-7-19 15:00:00");
+//        System.out.println("\nMake booking at July 19, 2023 15:00:00 Seats: AF17 AF18");
+//        System.out.println(Payment.makeBooking(t1, List.of("AF17", "AF18"), b)? msgSuccess : msgFailed);
+//        // valid date, invalid seat = Booking Failed
+//        Timestamp t2 = Timestamp.valueOf("2023-7-18 15:00:00");
+//        System.out.println("Make booking at July 18, 2023 15:00:00 Seat AF26");
+//        System.out.println(Payment.makeBooking(t2, "AF26", b)? msgSuccess : msgFailed);
+//        // valid date, valid seat = Booking Success
+//        System.out.println("Make booking at July 18, 2023 15:00:00 Seats: AF7 AF8");
+//        System.out.println(Payment.makeBooking(t2, List.of("AF7", "AF8"), b)? msgSuccess : msgFailed);
+//        // valid date, valid seat = Booking Success
+//        Timestamp t3 = Timestamp.valueOf("2023-7-20 12:00:00");
+//        System.out.println("Make booking at July 20, 2023 12:00:00 Seats: AF1 AF2");
+//        System.out.println(Payment.makeBooking(t3, List.of("AF1", "AF2"), b)? msgSuccess : msgFailed);
+//        // valid date, book the same seat = Booking Failed
+//        System.out.println("Make booking at July 20, 2023 12:00:00 Seat AF1");
+//        System.out.println(Payment.makeBooking(t3, "AF1", b)? msgSuccess : msgFailed);
+//        // check if the data changed
+//        System.out.println("\nUpdated Schedule");
+//        Algorithm.paginate(b.schedules, 0, 4, t-> true).forEach(System.out::println);
 
-        // PT Modul 5
-        // Tes Pagination
-        Bus b = createBus();
-        List<Timestamp> listOfSchedules = new ArrayList<>();
-        listOfSchedules.add(Timestamp.valueOf("2023-7-18 15:00:00"));
-        listOfSchedules.add(Timestamp.valueOf("2023-7-20 12:00:00"));
-        listOfSchedules.add(Timestamp.valueOf("2023-7-22 10:00:00"));
-        listOfSchedules.add(Timestamp.valueOf("2023-7-26 12:00:00"));
+        String filepath = "C:\\Users\\M Fahish HB\\Desktop\\Teknik Komputer UI\\Semester 3\\OOP\\Praktikum\\JBus Project\\JBus\\data\\station.json";
+        Gson gson = new Gson();
 
-        listOfSchedules.forEach(b::addSchedule);
-        System.out.println("Page 1");
-        Algorithm.paginate(b.schedules, 0, 3, t -> true).forEach(System.out::println);
-        System.out.println("=====================================================");
-        System.out.println("Page 2");
-        Algorithm.paginate(b.schedules, 1, 3, t -> true).forEach(System.out::println);
-        System.out.println("=====================================================");
-
-        // Tes Booking
-        String msgSuccess = "Booking Success!";
-        String msgFailed = "Booking Failed";
-        // valid date, invalid seat = Booking Failed
-        Timestamp t1 = Timestamp.valueOf("2023-7-19 15:00:00");
-        System.out.println("\nMake booking at July 19, 2023 15:00:00 Seats: AF17 AF18");
-        System.out.println(Payment.makeBooking(t1, List.of("AF17", "AF18"), b)? msgSuccess : msgFailed);
-        // valid date, invalid seat = Booking Failed
-        Timestamp t2 = Timestamp.valueOf("2023-7-18 15:00:00");
-        System.out.println("Make booking at July 18, 2023 15:00:00 Seat AF26");
-        System.out.println(Payment.makeBooking(t2, "AF26", b)? msgSuccess : msgFailed);
-        // valid date, valid seat = Booking Success
-        System.out.println("Make booking at July 18, 2023 15:00:00 Seats: AF7 AF8");
-        System.out.println(Payment.makeBooking(t2, List.of("AF7", "AF8"), b)? msgSuccess : msgFailed);
-        // valid date, valid seat = Booking Success
-        Timestamp t3 = Timestamp.valueOf("2023-7-20 12:00:00");
-        System.out.println("Make booking at July 20, 2023 12:00:00 Seats: AF1 AF2");
-        System.out.println(Payment.makeBooking(t3, List.of("AF1", "AF2"), b)? msgSuccess : msgFailed);
-        // valid date, book the same seat = Booking Failed
-        System.out.println("Make booking at July 20, 2023 12:00:00 Seat AF1");
-        System.out.println(Payment.makeBooking(t3, "AF1", b)? msgSuccess : msgFailed);
-        // check if the data changed
-        System.out.println("\nUpdated Schedule");
-        Algorithm.paginate(b.schedules, 0, 4, t-> true).forEach(System.out::println);
+        try {
+            BufferedReader buffer = new BufferedReader(new FileReader(filepath));
+            List<Station> stationjson = gson.fromJson(buffer, new TypeToken<List<Station>>() {}.getType());
+            stationjson.forEach(e -> System.out.println(e.toString()));
+            System.out.println();
+            buffer.close();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     private static void testExist(Integer[] t) {
@@ -211,6 +132,7 @@ public class JBus
     }
     
     public static float getDiscountPercentage(int beforeDiscount, int afterDiscount){
+
         float percentage;
         if (beforeDiscount <= afterDiscount){
             percentage = 0.0f;
