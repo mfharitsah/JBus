@@ -41,4 +41,6 @@ public class Renter extends Serializable
         this.phoneNumber = phoneNumber;
         this.address = address;
     }
+
+    public boolean validate
 }

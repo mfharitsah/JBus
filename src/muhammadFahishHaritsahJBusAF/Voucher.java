@@ -1,6 +1,6 @@
 package muhammadFahishHaritsahJBusAF;
 
-public class Voucher extends Serializable implements FileParser {
+public class Voucher extends Serializable {
     
     //field
     public String name;

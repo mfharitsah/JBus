@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Map;
 import java.sql.Timestamp;
 
-public class Bus extends Serializable implements FileParser {
+public class Bus extends Serializable {
     
     //field
     public String name;
@@ -37,9 +37,17 @@ public class Bus extends Serializable implements FileParser {
     
     //method
     public void addSchedule(Timestamp calendar){
-        Schedule sched = new Schedule(calendar, capacity);
-        
-        schedules.add(sched);
+        boolean isExist = false;
+        Schedule schedule = new Schedule(calendar, capacity);
+        for (Schedule sched : schedules){
+            if (sched.departureSchedule.equals(schedule.departureSchedule)) {
+                isExist = true;
+            }
+        }
+
+        if (isExist){
+            schedules.add(schedule);
+        }
     }
     
     public boolean read(){
@@ -50,7 +58,7 @@ public class Bus extends Serializable implements FileParser {
     }
     
     public String toString(){
-        String print = "\nBus :\n" + "Name : " + name + "\nFacility : " + facility.toString() + "" + price.toString() + "\nCapacity : " + capacity + "\n\nDeparture : " + departure.toString() + "\n\nArrival : " + arrival.toString() + "\n\nBus Type : " + busType.toString() + "\nCity : " + city.toString();
+        String print = "\nBus ID : " + id + "\nName : " + name + "\nFacility : " + facility.toString() + "" + price.toString() + "\nCapacity : " + capacity + "\n\nDeparture : " + departure.toString() + "\n\nArrival : " + arrival.toString() + "\n\nBus Type : " + busType.toString() + "\nCity : " + city.toString();
         return print;
     }
 }
