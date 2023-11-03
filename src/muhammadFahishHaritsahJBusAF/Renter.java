@@ -1,6 +1,8 @@
 package muhammadFahishHaritsahJBusAF;
 
 
+import java.util.regex.Pattern;
+
 /**
  * Write a description of class Renter here.
  *
@@ -13,6 +15,10 @@ public class Renter extends Serializable
     public String address;
     public String companyName;
     public int phoneNumber;
+
+    private final String REGEX_NAME = "^[A-Z][a-zA-Z0-9_]{3,19}$";
+    private final String REGEX_PHONE = "^[0-9]{9,12}$";
+
     
     public Renter(String companyName){
         super();
@@ -42,5 +48,17 @@ public class Renter extends Serializable
         this.address = address;
     }
 
-    public boolean validate
+    public boolean validate(){
+        boolean name = Pattern.matches(REGEX_NAME, String.valueOf(companyName));
+        boolean phone = Pattern.matches(REGEX_PHONE, String.valueOf(phoneNumber));
+
+        if(!name){
+            System.out.println("Not Found!");
+        }
+        if(!phone){
+            System.out.println("Not Found!");
+        }
+
+        return name && phone;
+    }
 }
