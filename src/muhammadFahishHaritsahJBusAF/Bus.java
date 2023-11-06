@@ -1,26 +1,28 @@
 package muhammadFahishHaritsahJBusAF;
 
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.text.SimpleDateFormat;
-import java.util.Map;
+import java.util.*;
+import java.text.*;
 import java.sql.Timestamp;
 
+/**
+ * Creates a new Bus with an id, name, facility, price, and capacity
+ *
+ * @author (your name)
+ * @version (a version number or a date)
+ */
 public class Bus extends Serializable {
-    
-    //field
     public String name;
-    public Facility facility;
-    public Price price;
-    public int capacity;
-    public Station departure;
     public Station arrival;
+    public int capacity;
     public BusType busType;
-    public City city;
     public List<Schedule> schedules;
-    
-    public Bus(String name, Facility facility, Price price, int capacity, BusType busType, City city, Station departure, Station arrival){
+    public City city;
+    public Price price;
+    public Facility facility;
+    public Station departure;
+
+    // instance variables - replace the example below with your own
+    public Bus(String name, Facility facility, Price price, int capacity, BusType busType, City city, Station departure, Station arrival) {
         super();
         this.name = name;
         this.facility = facility;
@@ -30,35 +32,26 @@ public class Bus extends Serializable {
         this.city = city;
         this.departure = departure;
         this.arrival = arrival;
-        
         this.schedules = new ArrayList<>();
-        
     }
-    
-    //method
-    public void addSchedule(Timestamp timestamp){
-        boolean isExist = false;
+
+    @Override
+    public String toString() {
+        String printLine = "Bus Details = " + " | ID : " + this.id + " | Name : " + this.name + " | Facility : " + this.facility + " | Price : " + price.toString() + " | Capacity : " + String.valueOf(capacity) + " | Bus Type : " + this.busType + " | City : " + this.city + " | Departure : " + this.departure + " | Arrival : " + this.arrival + " | ";
+        return printLine;
+    }
+
+    public void addSchedule(Timestamp timestamp) throws Exception {
+        boolean isExisting = false;
         Schedule schedule = new Schedule(timestamp, capacity);
-        for (Schedule sched : schedules){
+        for (Schedule sched : schedules) {
             if (sched.departureSchedule.equals(schedule.departureSchedule)) {
-                isExist = true;
+                isExisting = true;
             }
         }
 
-        if (isExist){
+        if (!isExisting) {
             schedules.add(schedule);
         }
-    }
-    
-    public boolean read(){
-        return false;        
-    }
-    public Object write(){
-        return null;
-    }
-    
-    public String toString(){
-        String print = "\nBus ID : " + id + "\nName : " + name + "\nFacility : " + facility.toString() + "" + price.toString() + "\nCapacity : " + capacity + "\n\nDeparture : " + departure.toString() + "\n\nArrival : " + arrival.toString() + "\n\nBus Type : " + busType.toString() + "\nCity : " + city.toString();
-        return print;
     }
 }

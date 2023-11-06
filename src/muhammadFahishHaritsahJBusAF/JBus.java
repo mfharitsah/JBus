@@ -9,15 +9,16 @@ import java.util.ArrayList;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.FileReader;
 
 
-public class JBus
-{
+public class JBus {
 
     public static void main(String[] args) {
 //        try {
@@ -105,17 +106,23 @@ public class JBus
 
     public static Bus createBus() {
         Price price = new Price(750000, 5);
-        Bus bus = new Bus("Netlab Bus", Facility.LUNCH, price, 25, BusType.REGULER, City.BANDUNG, new Station("Depok Terminal", City.DEPOK, "Jl. Margonda Raya"), new Station("Halte UI", City.JAKARTA, "Universitas Indonesia"));
+        Bus bus = new Bus("Netlab Bus", Facility.LUNCH, price, 25,
+                BusType.REGULER, City.BANDUNG, new Station("Depok Terminal", City.DEPOK,
+                "Jl. Margonda Raya"), new Station("Halte UI", City.JAKARTA, "Universitas Indonesia"));
         Timestamp timestamp = Timestamp.valueOf("2023-07-27 19:00:00");
-        bus.addSchedule(timestamp);
+        try{
+            bus.addSchedule(timestamp);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return bus;
     }
 
     public static List<Bus> filterByDeparture(List<Bus> buses, City departure, int page, int pageSize) {
         List<Bus> list = new ArrayList<>();
 
-        for(Bus bus : buses) {
-            if(bus.departure.city == departure) {
+        for (Bus bus : buses) {
+            if (bus.departure.city == departure) {
                 list.add(bus);
             }
         }
@@ -127,18 +134,17 @@ public class JBus
         return pageList;
     }
 
-    public static List<Bus> filterByPrice(List<Bus> buses, int min, int max)
-    {
+    public static List<Bus> filterByPrice(List<Bus> buses, int min, int max) {
         return Algorithm.<Bus>collect(buses, (e) -> e.price.price >= min && e.price.price <= max);
     }
 
-    public static Bus filterBusId(List<Bus> buses, int id){
+    public static Bus filterBusId(List<Bus> buses, int id) {
         return Algorithm.<Bus>find(buses, (e) -> {
             return e.id == id;
         });
     }
 
-    public static List<Bus> filterByDepartureAndArrival(List<Bus> buses, City departure, City arrival, int page, int pageSize){
+    public static List<Bus> filterByDepartureAndArrival(List<Bus> buses, City departure, City arrival, int page, int pageSize) {
         return Algorithm.<Bus>collect(buses, (e) -> {
             return e.arrival.city == arrival && e.departure.city == departure;
         });
@@ -170,9 +176,10 @@ public class JBus
             System.out.println("Not Found");
         }
     }
+
     private static void testCollect(Integer[] t) {
-        Predicate<Integer> below = (val)->val<=22;
-        Predicate<Integer> above = (val)->val>43;
+        Predicate<Integer> below = (val) -> val <= 22;
+        Predicate<Integer> above = (val) -> val > 43;
 
         List<Integer> integerBelow = Algorithm.collect(t, below);
         List<Integer> integerAbove = Algorithm.collect(t, above);
@@ -183,62 +190,64 @@ public class JBus
         System.out.println(integerAbove);
     }
 
-    
-    public static int getBusId(){
+
+    public static int getBusId() {
         return 0;
     }
-    
-    public static String getBusName(){
+
+    public static String getBusName() {
         String bus = "Bus";
         return bus;
     }
-    
-    public static boolean isDiscount(){
+
+    public static boolean isDiscount() {
         return true;
     }
-    
-    public static float getDiscountPercentage(int beforeDiscount, int afterDiscount){
+
+    public static float getDiscountPercentage(int beforeDiscount, int afterDiscount) {
 
         float percentage;
-        if (beforeDiscount <= afterDiscount){
+        if (beforeDiscount <= afterDiscount) {
             percentage = 0.0f;
-        } 
-            percentage = (float)( (beforeDiscount - afterDiscount)/(float)beforeDiscount ) * 100;
-        
-        
+        }
+        percentage = (float) ((beforeDiscount - afterDiscount) / (float) beforeDiscount) * 100;
+
+
         return percentage;
     }
-    
-    public static int getDiscountedPrice(int price, float discountPercentage){
+
+    public static int getDiscountedPrice(int price, float discountPercentage) {
         int discountedPrice;
-        if (discountPercentage > 100.0f){ discountPercentage =  100.0f; }
- 
-        discountedPrice = (int)(price - (price * (discountPercentage/100)));
-        
+        if (discountPercentage > 100.0f) {
+            discountPercentage = 100.0f;
+        }
+
+        discountedPrice = (int) (price - (price * (discountPercentage / 100)));
+
         return discountedPrice;
     }
-    
-    public static int getOriginalPrice(int discountedPrice, float discountPercentage){
-        int originalPrice = (int)(discountedPrice/(1 - discountPercentage*0.01));
-        
+
+    public static int getOriginalPrice(int discountedPrice, float discountPercentage) {
+        int originalPrice = (int) (discountedPrice / (1 - discountPercentage * 0.01));
+
         return originalPrice;
     }
-    
-    public static float getAdminFeePercentage(){
+
+    public static float getAdminFeePercentage() {
         return 0.05f;
     }
-    
-    public static int getAdminFee(int price){
+
+    public static int getAdminFee(int price) {
         float admin = getAdminFeePercentage();
-        int adminFee = (int)(price * admin);
-        
+        int adminFee = (int) (price * admin);
+
         return adminFee;
     }
-    
-    public static int getTotalPrice(int price, int numberOfSeat){
+
+    public static int getTotalPrice(int price, int numberOfSeat) {
         int adminFee = getAdminFee(price * numberOfSeat);
         int total = (price * numberOfSeat) + adminFee;
-        
+
         return total;
     }
 
