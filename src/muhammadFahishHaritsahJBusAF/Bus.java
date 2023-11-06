@@ -36,9 +36,9 @@ public class Bus extends Serializable {
     }
     
     //method
-    public void addSchedule(Timestamp calendar){
+    public void addSchedule(Timestamp timestamp){
         boolean isExist = false;
-        Schedule schedule = new Schedule(calendar, capacity);
+        Schedule schedule = new Schedule(timestamp, capacity);
         for (Schedule sched : schedules){
             if (sched.departureSchedule.equals(schedule.departureSchedule)) {
                 isExist = true;

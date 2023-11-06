@@ -1,13 +1,17 @@
 package muhammadFahishHaritsahJBusAF;
 
+import java.util.regex.Pattern;
+
 public class Account extends Serializable {
     
     //field
     public String email;
     public String name;
     public String password;
+    public static final String REGEX_EMAIL = "^[a-zA-Z0-9]+@[a-zA-Z]+(\\.[a-zA-Z]+)+$";
+    public static final String REGEX_PASSWORD = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)[A-Za-z\\d]{8,}$";
     
-    public Account(int id, String name, String email, String password){
+    public Account(String name, String email, String password){
         super();
         this.email = email;
         this.password = password;
@@ -20,9 +24,23 @@ public class Account extends Serializable {
     public Object write(){
         return null;
     }
+
+    public boolean validate(){
+        boolean emailCheck = Pattern.matches(REGEX_EMAIL, String.valueOf(email));
+        boolean passwordCheck = Pattern.matches(REGEX_PASSWORD, String.valueOf(password));
+
+        if(!emailCheck){
+            System.out.println("Not Found!");
+        }
+        if(!passwordCheck){
+            System.out.println("Not Found!");
+        }
+
+        return emailCheck && passwordCheck;
+    }
      
     public String toString(){
-        String print = "\nAccount : " + "\nEmail : " + email + "\nPassword : " + password + "\nName : " + name;
+        String print = "Name : " + name + "\nEmail : " + email + "\nPassword : " + password;
         return print;
     }
 }
