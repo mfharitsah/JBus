@@ -1,0 +1,1 @@
+[{"email":"muhammadfahish@ui.ac.id","name":"Haris","password":"Harisgam1ng21","company":{"address":"Jalan Lurus Menuju Surga","companyName":"PT Mencari Cinta Sejati","phoneNumber":"021938204098","REGEX_NAME":"^[A-Z][a-zA-Z0-9_]{3,19}$","REGEX_PHONE":"^[0-9]{9,12}$","id":0},"balance":0.0,"id":2}]

@@ -1,6 +1,7 @@
 package com.muhammadFahishHaritsahJBusAF;
 
 import java.util.regex.Pattern;
+import com.muhammadFahishHaritsahJBusAF.dbjson.*;
 
 public class Account extends Serializable {
     
@@ -8,14 +9,21 @@ public class Account extends Serializable {
     public String email;
     public String name;
     public String password;
-    public static final String REGEX_EMAIL = "^[a-zA-Z0-9]+@[a-zA-Z]+(\\.[a-zA-Z]+)+$";
-    public static final String REGEX_PASSWORD = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)[A-Za-z\\d]{8,}$";
+    public Renter company;
+    public double balance;
+    public static final String REGEX_EMAIL =
+            "^[a-zA-Z0-9]+@[a-zA-Z_]+?\\.[a-zA-Z.]+[a-zA-Z]+$";
+    public static final String REGEX_PASSWORD =
+            "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$";
+
     
     public Account(String name, String email, String password){
         super();
         this.email = email;
         this.password = password;
         this.name = name;
+        this.balance = 0.0d;
+        this.company = null;
     }
     
     public boolean read(){
@@ -37,6 +45,14 @@ public class Account extends Serializable {
         }
 
         return emailCheck && passwordCheck;
+    }
+
+    public boolean topUp(double amount) {
+        if (amount > 0.0) {
+            this.balance += amount;
+            return true;
+        }
+        else return false;
     }
      
     public String toString(){

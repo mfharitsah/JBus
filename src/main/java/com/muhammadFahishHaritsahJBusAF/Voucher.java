@@ -1,5 +1,7 @@
 package com.muhammadFahishHaritsahJBusAF;
 
+import com.muhammadFahishHaritsahJBusAF.dbjson.*;
+
 public class Voucher extends Serializable {
     
     //field

@@ -1,7 +1,7 @@
 package com.muhammadFahishHaritsahJBusAF;
 
-
 import java.util.regex.Pattern;
+import com.muhammadFahishHaritsahJBusAF.dbjson.*;
 
 /**
  * Write a description of class Renter here.
@@ -16,8 +16,8 @@ public class Renter extends Serializable
     public String companyName;
     public String phoneNumber;
 
-    private final String REGEX_NAME = "^[A-Z][a-zA-Z0-9_]{3,19}$";
-    private final String REGEX_PHONE = "^[0-9]{9,12}$";
+    private static final String REGEX_NAME = "^[A-Z][a-zA-Z0-9_]{3,19}$";
+    private static final String REGEX_PHONE = "^[0-9]{9,12}$";
 
     
     public Renter(String companyName) {

@@ -2,7 +2,7 @@ package com.muhammadFahishHaritsahJBusAF;
 
 import java.util.Calendar;
 import java.sql.Timestamp;
-
+import com.muhammadFahishHaritsahJBusAF.dbjson.*;
 
 /**
  * Write a description of class Invoice here.
