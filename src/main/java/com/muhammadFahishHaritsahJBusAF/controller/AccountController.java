@@ -64,6 +64,7 @@ public class AccountController implements BasicGetController<Account>
 
         String hashedPassword = hashingString(password);
 
+        
         for (Account acc : accountTable) {
             if (acc.email.equals(email) && acc.password.equals(hashedPassword)) {
                 return new BaseResponse<>(true, "Login success!", acc);
