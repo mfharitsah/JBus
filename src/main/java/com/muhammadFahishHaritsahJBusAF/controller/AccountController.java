@@ -65,13 +65,13 @@ public class AccountController implements BasicGetController<Account>
         String hashedPassword = hashingString(password);
 
         for (Account acc : accountTable) {
-            if (!acc.email.equals(email)) { return new BaseResponse<>(false, "Login failed! The email has not yet registered ", null); }
-            if (!acc.password.equals(hashedPassword)) { return new BaseResponse<>(false, "Login failed! Password is incorrect", null); }
-
-            return new BaseResponse<>(true, "Login success!", acc);
+            if (acc.email.equals(email) && acc.password.equals(hashedPassword)) {
+                return new BaseResponse<>(true, "Login success!", acc);
+            }
         }
 
-        return null;
+        return new BaseResponse<>(false, "Login failed! Email or Password is incorrect", null);
+
     }
 
     @PostMapping("/{id}/registerRenter")
