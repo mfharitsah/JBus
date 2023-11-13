@@ -11,10 +11,10 @@ public class Payment extends Invoice
     //field
     private int busId;
     public Timestamp departureDate;
-    public String busSeat;
+    public List<String> busSeat;
     
     //constructor
-    public Payment(int buyerId, int renterId, int busId, String busSeat, Timestamp departureDate){
+    public Payment(int buyerId, int renterId, int busId, List<String> busSeat, Timestamp departureDate){
         super(renterId, buyerId);
         
         this.busId = busId;
@@ -23,7 +23,7 @@ public class Payment extends Invoice
         this.departureDate = departureDate;
     }
     
-    public Payment(Account buyer, Renter renter, int busId, String busSeat, Timestamp departureDate){
+    public Payment(Account buyer, Renter renter, int busId, List<String> busSeat, Timestamp departureDate){
         super(buyer, renter);
         
         this.busId = busId;

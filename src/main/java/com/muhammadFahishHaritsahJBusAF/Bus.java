@@ -17,28 +17,27 @@ public class Bus extends Serializable {
     public int capacity;
     public BusType busType;
     public List<Schedule> schedules;
-    public City city;
     public Price price;
-    public Facility facility;
+    public List<Facility> facility;
     public Station departure;
+    public int accountId;
 
     // instance variables - replace the example below with your own
-    public Bus(String name, Facility facility, Price price, int capacity, BusType busType, City city, Station departure, Station arrival) {
+    public Bus(String name, int capacity, List<Facility> facility, BusType busType, Price price, Station departure, Station arrival) {
         super();
         this.name = name;
-        this.facility = facility;
         this.price = price;
         this.capacity = capacity;
         this.busType = busType;
-        this.city = city;
         this.departure = departure;
         this.arrival = arrival;
         this.schedules = new ArrayList<>();
+        this.facility = facility;
     }
 
     @Override
     public String toString() {
-        String printLine = "Bus Details = " + " | ID : " + this.id + " | Name : " + this.name + " | Facility : " + this.facility + " | Price : " + price.toString() + " | Capacity : " + String.valueOf(capacity) + " | Bus Type : " + this.busType + " | City : " + this.city + " | Departure : " + this.departure + " | Arrival : " + this.arrival + " | ";
+        String printLine = "Bus Details = " + " | ID : " + this.id + " | Name : " + this.name + " | Facility : " + this.facility + " | Price : " + price.toString() + " | Capacity : " + String.valueOf(capacity) + " | Bus Type : " + this.busType  + " | Departure : " + this.departure + " | Arrival : " + this.arrival + " | ";
         return printLine;
     }
 

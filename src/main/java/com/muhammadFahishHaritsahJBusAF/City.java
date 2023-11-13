@@ -8,5 +8,10 @@ public enum City
     SEMARANG,
     SURABAYA,
     BALI,
-    YOGYAKARTA;
+    YOGYAKARTA,
+    BEKASI,
+    TANGGERANG,
+    BOGOR,
+    SUKABUMI;
+
 }
