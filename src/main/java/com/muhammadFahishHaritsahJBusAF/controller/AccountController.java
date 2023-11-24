@@ -26,9 +26,6 @@ public class AccountController implements BasicGetController<Account>
         }
     }
 
-    @GetMapping
-    String index() { return "account page"; }
-
     @PostMapping("/register")
     BaseResponse<Account> register
             (
@@ -41,7 +38,7 @@ public class AccountController implements BasicGetController<Account>
             Account regist = new Account(name, email, password);
 
             boolean accountExist = Algorithm.<Account>exists(accountTable, e -> e.email.equals(email));
-            if (!regist.validate()) { return new BaseResponse<>(false, "Please input a valid email and password!", null); }
+            //if (!regist.validate()) { return new BaseResponse<>(false, "Please input a valid email and password!", null); }
             if (!accountExist){
 
                 regist = new Account(name, email, AccountController.hashingString(password));
