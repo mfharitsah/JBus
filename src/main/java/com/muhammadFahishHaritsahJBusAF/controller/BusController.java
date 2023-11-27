@@ -2,10 +2,7 @@ package com.muhammadFahishHaritsahJBusAF.controller;
 
 import com.fasterxml.jackson.databind.ser.Serializers;
 import com.muhammadFahishHaritsahJBusAF.*;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.muhammadFahishHaritsahJBusAF.dbjson.*;
 import com.muhammadFahishHaritsahJBusAF.Account;
 import com.muhammadFahishHaritsahJBusAF.Algorithm;
@@ -63,10 +60,9 @@ public class BusController implements BasicGetController<Bus> {
 
 
             }
-            return new BaseResponse<>(false, "Account not found or not registered as a renter", null);
         }
 
-        return null;
+        return new BaseResponse<>(false, "Account not found or not registered as a renter", null);
     }
 
     @PostMapping("/addSchedule")
@@ -87,5 +83,15 @@ public class BusController implements BasicGetController<Bus> {
             return new BaseResponse<>(false, "Failed to add new schedule", null);
         }
     }
+
+    @GetMapping("/getMyBus")
+    public List<Bus> getMyBus(
+            @RequestParam int accountId
+    ) {
+        return Algorithm.<Bus>collect(getJsonTable(),
+                b -> b.accountId==accountId
+        );
+    }
+
 
 }
