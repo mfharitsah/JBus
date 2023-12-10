@@ -3,6 +3,7 @@ package com.muhammadFahishHaritsahJBusAF;
 import java.util.*;
 import java.text.*;
 import java.sql.Timestamp;
+
 import com.muhammadFahishHaritsahJBusAF.dbjson.*;
 
 /**
@@ -13,18 +14,19 @@ import com.muhammadFahishHaritsahJBusAF.dbjson.*;
  */
 public class Bus extends Serializable {
     public String name;
+    public Station departure;
     public Station arrival;
     public int capacity;
     public BusType busType;
     public List<Schedule> schedules;
     public Price price;
-    public List<Facility> facility;
-    public Station departure;
+    public List<Facility> facility = new ArrayList<>();
     public int accountId;
 
     // instance variables - replace the example below with your own
-    public Bus(String name, int capacity, List<Facility> facility, BusType busType, Price price, Station departure, Station arrival) {
+    public Bus(int accountId, String name, int capacity, List<Facility> facility, BusType busType, Price price, Station departure, Station arrival) {
         super();
+        this.accountId = accountId;
         this.name = name;
         this.price = price;
         this.capacity = capacity;
@@ -37,7 +39,7 @@ public class Bus extends Serializable {
 
     @Override
     public String toString() {
-        String printLine = "Bus Details = " + " | ID : " + this.id + " | Name : " + this.name + " | Facility : " + this.facility + " | Price : " + price.toString() + " | Capacity : " + String.valueOf(capacity) + " | Bus Type : " + this.busType  + " | Departure : " + this.departure + " | Arrival : " + this.arrival + " | ";
+        String printLine = "Bus Details = " + " | ID : " + this.id + " | Name : " + this.name + " | Facility : " + this.facility.toString() + " | Price : " + price.toString() + " | Capacity : " + String.valueOf(capacity) + " | Bus Type : " + this.busType + " | Departure : " + this.departure + " | Arrival : " + this.arrival + " | " + "Schedules : " + this.schedules;
         return printLine;
     }
 

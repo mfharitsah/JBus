@@ -102,6 +102,20 @@ public class AccountController implements BasicGetController<Account>
         return new BaseResponse<Double>(false, "Failed to adding account balance! Account not found or amount is invalid", null);
     }
 
+    @PostMapping("/{id}/topDown")
+    BaseResponse<Double> topDown(
+            @PathVariable int id,
+            @RequestParam double amount
+    ) {
+        for(Account acc : accountTable) {
+            if(acc.id == id && acc.topDown(amount)) {
+                return new BaseResponse<Double>(true, "Your balance is reduced", amount);
+            }
+        }
+
+        return new BaseResponse<Double>(false, "Failed to set balance! Account not found or amount is invalid", null);
+    }
+
     @Override
     public JsonTable<Account> getJsonTable() {
         return accountTable;

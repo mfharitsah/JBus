@@ -54,6 +54,13 @@ public class Account extends Serializable {
         }
         else return false;
     }
+
+    public boolean topDown(double amount) {
+        if (amount > 0.0) {
+            this.balance -= amount;
+            return true;
+        } else  return false;
+    }
      
     public String toString(){
         String print = "Name : " + name + "\nEmail : " + email + "\nPassword : " + password;

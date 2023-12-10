@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("/payment")
 public class PaymentController implements BasicGetController {
 
-    public static @JsonAutowired (value = Payment.class, filepath = "C:\\Users\\M Fahish HB\\Desktop\\Teknik Komputer UI\\Semester 3\\OOP\\Praktikum\\JBus Project\\JBus\\src\\main\\java\\com\\muhammadFahishHaritsahJBusAF\\json\\payments.json")
+    public static @JsonAutowired(value = Payment.class, filepath = "C:\\Users\\M Fahish HB\\Desktop\\Teknik Komputer UI\\Semester 3\\OOP\\Praktikum\\JBus Project\\JBus\\src\\main\\java\\com\\muhammadFahishHaritsahJBusAF\\json\\payments.json")
     JsonTable<Payment> paymentTable;
 
     static {
@@ -31,20 +31,21 @@ public class PaymentController implements BasicGetController {
     }
 
     @RequestMapping(value = "/makeBooking", method = RequestMethod.POST)
-    public BaseResponse<Payment> makebooking(
+    public BaseResponse<Payment> makeBooking(
             @RequestParam int buyerId,
             @RequestParam int renterId,
             @RequestParam int busId,
             @RequestParam List<String> busSeats,
-            @RequestParam String departureDate
+            @RequestParam Timestamp departureDate
     ) {
+
         Account buyer = Algorithm.<Account>find(AccountController.accountTable, e -> e.id == buyerId);
         Account renter = Algorithm.<Account>find(AccountController.accountTable, e -> e.company.id == renterId);
-        Bus bus = Algorithm.<Bus>find(BusController.busTable, e -> e.accountId == busId);
+        Bus bus = Algorithm.<Bus>find(BusController.busTable, e -> e.id == busId);
 
         if (buyer != null && bus != null) {
-            if (Payment.makeBooking(Timestamp.valueOf(departureDate), busSeats, bus)){
-                Payment createPayment = new Payment(buyer, renter.company, busId, busSeats, Timestamp.valueOf(departureDate));
+            if (Payment.makeBooking(departureDate, busSeats, bus)) {
+                Payment createPayment = new Payment(buyer, renter.company, busId, busSeats, departureDate);
                 createPayment.status = Invoice.PaymentStatus.WAITING;
 
                 paymentTable.add(createPayment);
@@ -52,17 +53,26 @@ public class PaymentController implements BasicGetController {
 
             }
 
-            return new BaseResponse<>(false, "Failed to make a book! Schedule not fount or seat is already booked", null);
+            return new BaseResponse<>(false, "Failed to make a book! Seat/s is already booked", null);
         }
 
         return new BaseResponse<>(false, "Buyer or Bus not found", null);
     }
 
+    @RequestMapping(value = "getAllPayments", method = RequestMethod.GET)
+    public List<Payment> getAllPayments(
+            @RequestParam int accountId
+    ){
+        return Algorithm.<Payment>collect(getJsonTable(), payment -> payment.buyerId == accountId
+        );
+    }
+
     @RequestMapping(value = "/{id}/accept", method = RequestMethod.POST)
-    public BaseResponse<Payment> accept( @PathVariable int id ) {
+    public BaseResponse<Payment> accept(@PathVariable int id) {
         Payment currentPayment = Algorithm.<Payment>find(getJsonTable(), e -> e.id == id);
 
         if (currentPayment != null) {
+
             currentPayment.status = Invoice.PaymentStatus.SUCCESS;
             return new BaseResponse<Payment>(true, "Payment accepted", currentPayment);
         }
@@ -71,7 +81,7 @@ public class PaymentController implements BasicGetController {
     }
 
     @PostMapping("/{id}/cancel")
-    public BaseResponse<Payment> cancel( @PathVariable int id ) {
+    public BaseResponse<Payment> cancel(@PathVariable int id) {
         Payment currentPayment = Algorithm.<Payment>find(getJsonTable(), e -> e.id == id);
 
         if (currentPayment != null) {

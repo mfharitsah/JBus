@@ -51,7 +51,8 @@ public class BusController implements BasicGetController<Bus> {
                 Station arrival = Algorithm.<Station>find(StationController.stationTable, station -> station.id == stationArrivalId);
                 if (departure != null && arrival != null) {
 
-                        Bus createBus = new Bus(name, capacity, facilities, busType, new Price(price), departure, arrival);
+                        Bus createBus = new Bus(accountId, name, capacity, facilities, busType, new Price(price), departure, arrival);
+                    System.out.println(busTable);
                         busTable.add(createBus);
                         return new BaseResponse<>(true, "Successfully created new bus!", createBus);
 
@@ -68,15 +69,15 @@ public class BusController implements BasicGetController<Bus> {
     @PostMapping("/addSchedule")
     public BaseResponse<Bus> addSchedule(
             @RequestParam int busId,
-            @RequestParam String time
+            @RequestParam Timestamp time
     ) {
         Bus theBus = Algorithm.<Bus>find(busTable, e -> e.id == busId);
         if (theBus == null) {
-            return new BaseResponse<>(false, "Bus not found", null);
+            return new BaseResponse<>(false, "ID invalid! Bus not found", null);
         }
 
         try {
-            theBus.addSchedule(Timestamp.valueOf(time));
+            theBus.addSchedule(time);
             return new BaseResponse<>(true, "Successfully adding schedule", theBus);
         } catch (Exception e) {
             e.printStackTrace();
@@ -85,13 +86,18 @@ public class BusController implements BasicGetController<Bus> {
     }
 
     @GetMapping("/getMyBus")
-    public List<Bus> getMyBus(
+    public BaseResponse<List<Bus>> getMyBus(
             @RequestParam int accountId
     ) {
-        return Algorithm.<Bus>collect(getJsonTable(),
-                b -> b.accountId==accountId
+        return new BaseResponse<>(true, "Successfullly get MyBus", Algorithm.<Bus>collect(getJsonTable(),
+                b -> b.accountId==accountId)
         );
     }
 
+    @GetMapping("/getAllBus")
+    public List<Bus> getAllBus() {
+        return Algorithm.<Bus>collect(getJsonTable(), b -> true
+        );
+    }
 
 }

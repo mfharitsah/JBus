@@ -15,7 +15,6 @@ public class Schedule
    
    public Schedule(Timestamp departureSchedule, int numberOfSeats){
        this.departureSchedule = departureSchedule;
-       
        initializeSeatAvailability(numberOfSeats);
    }
    
@@ -28,7 +27,7 @@ public class Schedule
    }
    
    public void printSchedule(){
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM dd, yyyy HH:mm:ss");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String formattedDate = dateFormat.format(this.departureSchedule.getTime());
         
         // Print tanggal keberangkatan
